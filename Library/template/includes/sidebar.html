@@ -1,0 +1,74 @@
+    {% if request.user.is_authenticated %}
+    {% load icon %}
+    <br><br><br>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar" style="background-color:rgba(0,0,0,0.7)">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+            {% if request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link active" href="/books/addbook/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "book" class="css-class" height="20" width="20" %}</span>
+                  Kitap Ekleme 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/borrowbook/timelapse/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "rotate-cw" class="css-class" height="20" width="20" %}</span>
+                  Zaman Atlama 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/user/listuser/{{request.user.id}}" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "users" class="css-class" height="20" width="20" %}</span>
+                  Kullanıcı Listele
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/books/listbooks/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "book-open" class="css-class" height="20" width="20" %}</span>
+                  Kitapları Listele 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/borrowbook/list/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "archive" class="css-class" height="20" width="20" %}</span>
+                  Kullanıcı Ve Kitap Listele 
+                </a>
+              </li>
+            {%else%}
+              <li class="nav-item">
+                <a class="nav-link" href="/books/listbooks/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "book-open" class="css-class" height="20" width="20" %}</span>
+                  Kitap Arama
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/borrowbook/takenbookview/" style='color:white;'>
+                  <span data-feather="home" style='color:white;'>{% icon "archive" class="css-class" height="20" width="20" %}</span>
+                  Kitap Alma
+                </a>
+              </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/borrowbook/givebook/{{request.user.username}}" style='color:white;'>
+                 <span data-feather="home" style='color:white;'>{% icon "archive" class="css-class" height="20" width="20" %}</span>
+                  Kitap Verme
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/borrowbook/yourbooks/{{request.user.username}}/" style='color:white;'>
+                 <span data-feather="home" style='color:white;'>{% icon "archive" class="css-class" height="20" width="20" %}</span>
+                  Aldığın Kitaplar
+                </a>
+              </li>
+            {%endif%}
+            </ul>
+          </div>
+        </nav>
+        {% endif %}
+<style>
+.col-md-2{
+     border:5px solid #3E5265;
+}
+</style>

@@ -1,0 +1,32 @@
+{% extends 'layout.html'%}
+
+{%block body%}
+{% load crispy_forms_tags %}
+
+   <div class="jumbotron text-center">
+        <div class="row">
+             <div class="col-md-6 offset-md-3">
+
+               <h3>Kayıt Ol</h3>
+               <hr>
+               
+              <form method=post>
+                {% csrf_token %}
+                {{form|crispy}}
+                <br>
+                <button type = "submit" class = "btn btn-success">Kayıt Ol</button>
+              </form>
+             </div>
+    </div>
+</div>
+<style>
+   .jumbotron{
+    background:rgba(0,0,0,0.7);
+    color:white;
+    border:5px solid #3E5265;
+    width: 600px;
+    margin: 0 auto
+   }
+</style>
+
+{% endblock body%} 

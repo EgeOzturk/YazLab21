@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{%load static%}
+{%load icon %}
+<html lang="en">
+<head>
+    <meta charset="UTH-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="icon" href="/static/bookshelf-icon.png">
+    <title>Kütüphane</title>
+</head>
+<!---"background-color:#F4F8F9;"-->
+<body style="background-image: url('/static/library2.jpg');">
+    {% include "includes/navbar.html" %}
+    {% include "includes/sidebar.html" %}
+    
+    <div class = "container">
+     
+         {% if request.user.is_authenticated %}
+         <style>
+            div.container{
+                 margin-top : 10px;
+            }
+         </style>  
+        {% else %}
+         <style>
+            div.container{
+                 margin-top : 80px;
+            }
+         </style>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+            
+            {% if message.tags == "info"%}
+            <div class="alert alert-danger">{{ message }}</div>
+            
+            {% else %}
+            <div class="alert alert-dark">{{ message }}</div>
+            
+            {% endif %}
+            
+            {% endfor %}
+        {% endif %}
+
+        {%block body%}
+
+        {% endblock body%}
+    </div>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+</body>
+</html>
+
+

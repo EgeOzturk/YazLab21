@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{%block body%}
+{% load crispy_forms_tags %}
+
+ <div class="jumbotron text-left">
+      {% if control %}
+        <h3>Zamanı Ötele</h3>
+        <hr>
+        <form action="/borrowbook/time/everybody/">
+          {%csrf_token%}
+          <input class="form input-sm form-control-borderless" name="keyword2" style="width:300px" type="search" placeholder="Gün Sayısı">
+          <button class="btn-primary btn-sm" type="submit">Herkesi Ötele</button>
+          <hr>
+        </form> 
+      {%else%}
+      <h3>Alınan Kitaplar</h3>
+      <hr>
+      {%endif%}
+
+     {% if listuserbooks %}
+     <table class="table table-white">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Kitap Adı</th>
+      <th scope="col">ISPN</th>
+      <th scope="col">Kullanıcı Adı</th>
+      <th scope="col">Aldığı Tarih</th>
+      <th scope="col">Vereceği Tarih</th>
+      <th scope="col">Geçikti Mi?</th>
+      {% if control %}
+          <th scope="col">Ötelenecek Gün Sayısı</th>      
+      {%endif%}
+    </tr>
+  </thead>
+  <tbody>
+    {% for lstuserbk  in  listuserbooks %}
+      <tr>
+        <th scope="row">{{lstuserbk.id}}</th>
+        <td>{{lstuserbk.bookname}}</td>
+        <td>{{lstuserbk.ISPN}}</td>
+        <td>{{lstuserbk.person}}</td>
+        <td>{{lstuserbk.datetaken}}</td>
+        <td>{{lstuserbk.duedate}}</td>
+        <td>{{lstuserbk.status}}</td>
+        {% if control %}
+         <form action="/borrowbook/time/{{lstuserbk.id}}/">
+         {%csrf_token%}
+            <td>
+              <input class="form input-sm form-control-borderless" name="keyword" style="width:100px" type="search" placeholder="Gün Sayısı">
+              <button class="btn-primary btn-sm" type="submit">Kaydet</button>
+            </td>  
+          </form>
+        {%endif%}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%else%}
+        <div class = "alert alert-info">
+            Henüz Hiç Kitap Alınmamış...
+        </div>
+{%endif%}
+   </div>
+  <style>
+   .jumbotron{
+     background:rgba(0,0,0,0.7);
+     color:white;
+     border:5px solid #3E5265;
+     margin: 0 auto
+   }
+   </style>
+
+{% endblock body%}
